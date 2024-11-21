@@ -1,11 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getDatabase, ref, push, onValue } from "firebase/database"; // Import necessary functions for Firebase Database
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyC8WQLC-JNXhXa05mlGdR_ofSzFxV4v5Jw",
   authDomain: "ai-powered-note-taking-app.firebaseapp.com",
@@ -21,15 +19,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-const noteRef = firebase.database().ref('notes');
-noteRef.push({
+// Initialize Realtime Database
+const database = getDatabase(app);
+
+// Push a new note to the "notes" path
+const noteRef = ref(database, 'notes');
+push(noteRef, {
   content: "This is a note",
   timestamp: Date.now()
 });
 
-
-const noteRef = firebase.database().ref('notes');
-noteRef.on('value', (snapshot) => {
+// Listen for changes in the "notes" path
+onValue(noteRef, (snapshot) => {
   const notes = snapshot.val();
   console.log(notes);
 });

@@ -1,7 +1,20 @@
 {
+  "name": "ai-powered-note-taking-app",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
-    "firebase": "^11.0.2",
+    "firebase": "^11.0.2"
+  },
+  "devDependencies": {
     "rollup": "^4.27.3",
     "webpack": "^5.96.1"
-  }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "AI-powered note-taking app"
 }
